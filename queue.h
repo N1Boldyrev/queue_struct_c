@@ -62,11 +62,14 @@ void enqueue(Queue* queue, char* input_data)
         for(size_t i = 0; i < queue->data_len && i < strlen(input_data); i++)
             queue->data[queue->current_elem][i] = input_data[i];
         
-        //Swap elements
-        
-        char* temp = queue->data[queue->current_elem - 1];
-        queue->data[queue->current_elem - 1] = queue->data[queue->current_elem];
-        queue->data[queue->current_elem] = temp;
+        //New element to end of queue
+        char* tmp;
+        for(size_t i = queue->current_elem; i > 0; i--)
+        {
+            tmp = queue->data[i - 1];
+            queue->data[i - 1] = queue->data[i];
+            queue->data[i] = tmp;
+        }
     }
 }
 
